@@ -1,0 +1,113 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Term API",
+      "version": "v2.0",
+      "description": " <p>The Term API retrieves terms and associated sessions.</p>\n<hr>\n<h2><strong>Getting Started</strong></h2> <h3>How do I use this API?</h3> <div class='over-content-requests'> <p><strong>Request URL: </strong> <code>https://go.apis.huit.harvard.edu/ats/term/v2/terms</code></p> <p><strong>Request Method: </strong> <code>GET</code></p> <p><strong>Authorization: </strong> <code>API Key</code></p> <ul> <li><strong>Header Key: </strong> <code>X-Api-Key</code></li> <li><strong>Header Value: </strong> <code>&lt;Client ID&gt;</code></li> </ul> <p><em>Note: please be sure to use the API Key in the header and not the query parameter string. For security we've blocked requests that use the API Key in the query parameter string.</em></p> </div> <hr> <h2><strong>Frequently Asked Questions</strong></h2> <h3>What input/output formats are supported?</h3> <p>This API supports JSON requests and responses.</p> <h3>I received access to the API. What do I do next?</h3> <p>If you have received notice that you've been granted access to the API and you are able to see your Client ID, you are ready to start using the API in your application. To test that your Client ID works or to walk through a simple example, follow the Postman Guide page on this portal and refer to the Getting Started section of this page for API-specific information.</p> <hr> <h2><strong>Request Access</strong></h2> <p>To access this API, please register your app here in the portal (see the guides section), and email myharvard_support@harvard.edu. Once approved you'll be able to conduct API calls using the keys provided when you registered your app. <hr> <h2><strong>Terms of Use</strong></h2> <h3></h3> <p>All existing, University-wide policies regarding data usage have been reviewed and MUST be followed as documented:</p> <ul> <li><a href='https://policy.security.harvard.edu/' target='_blank'>Harvard Information Security Policy</a></li> <li><a href='http://hwpi.harvard.edu/files/provost/files/policy_on_access_to_electronic_information.pdf' target='_blank'>Policy on Access to Electronic Information</a></li> <li><a href='https://huit.harvard.edu/it-professional-code-conduct-protect-electronic-information' target='_blank'>IT Professional Code of Conduct</a></li> <li><a href='https://policy.security.harvard.edu/u15--Confidentiality-agreement-and-training' target='_blank'>Confidentiality Agreement and Training</a></li> <li><a href='https://ogc.harvard.edu/book/breach-data-security-what-do' target='_blank'>Data Breach Policy</a></li> <li>All application infrastructure receiving data must conform to <a href='https://policy.security.harvard.edu/level-3' target='_blank'>Harvard Information Security Policy for Level 3 data</a>.</li> </ul> <p>Equivalent security, NDA, <a href='https://security.harvard.edu/node/55246' target='_blank'>Contract Riders</a> and other relevant requirements are in place for Contractors/Vendors/3rd Parties</p> <p>Redistribution of data is strictly prohibited without written consent.</p> "
+    },
+    "servers": [
+      {
+        "url": "https://go.apis.huit.harvard.edu/ats/term/v2"
+      }
+    ],
+    "paths": {
+      "/terms": {
+        "get": {
+          "security": [
+            {
+              "apikey": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "404": {
+              "description": "Not found"
+            },
+            "500": {
+              "description": "Error connecting to DB"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "crossRegDate",
+            "in": "query",
+            "description": "Cross-registration date of format YYYY-MM-DD",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "school",
+            "in": "query",
+            "description": "Three letter school code",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "session",
+            "in": "query",
+            "description": "Session designation",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionDate",
+            "in": "query",
+            "description": "Session date of format YYYY-MM-DD",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "term",
+            "in": "query",
+            "description": "Term ID",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "termDate",
+            "in": "query",
+            "description": "Term date of format YYYY-MM-DD",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Returns terms with associated sessions"
+      },
+      "/monitor/health": {
+        "get": {
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "description": "Used for monitoring only. If all is well will return a 200 and a JSON body containing status=PASS.",
+          "operationId": "GET_monitor-health"
+        }
+      }
+    },
+    "components": {
+      "securitySchemes": {
+        "apikey": {
+          "description": "This API supports APIKey Authentication.\n",
+          "type": "apiKey",
+          "in": "header",
+          "name": "X-Api-Key"
+        }
+      }
+    }
+  }
